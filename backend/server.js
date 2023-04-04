@@ -1,7 +1,7 @@
 const app = require("./app");
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/database");
-const path = require("path")
+
 
 // Handling Uncaught Exception
 process.on("uncaughtException", (err) => {
@@ -26,14 +26,10 @@ cloudinary.config({
 });
 
 
-app.use(express.static(path.join(__dirname, "../frontend/build")))
-app.get('*', function(req,res){
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"))
-})
-  
 const server = app.listen(process.env.PORT, () => {
   console.log(`Server is working on http://localhost:${process.env.PORT}`);
 });
+
 
 // Unhandled Promise Rejection
 process.on("unhandledRejection", (err) => {
@@ -44,3 +40,8 @@ process.on("unhandledRejection", (err) => {
     process.exit(1);
   });
 });
+
+
+
+  
+

@@ -4,8 +4,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
-
-
+const path = require("path"); 
 
 const errorMiddleware = require("./middleware/error");
 
@@ -35,7 +34,10 @@ app.use("/api/v1", payment);
 
 // app.use(cors({ origin: true, credentials: true}));
 
-
+app.use(express.static(path.join(__dirname, "../frontend/build")))
+app.get('*', function(req,res){
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"))
+})
 
 
 // Middleware for Errors
